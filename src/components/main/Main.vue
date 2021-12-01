@@ -1,6 +1,5 @@
 <template>
-  <main>
-    <h1>main</h1>
+  <main class="main">
     <NavBar />
     <MainBlock />
   </main>
@@ -19,4 +18,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.main {
+  display: flex;
+}
+</style>

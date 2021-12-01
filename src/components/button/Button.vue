@@ -11,9 +11,6 @@ export default {
     type: String,
     default: "button",
   },
-  data() {
-    return { onClickFilm: 0 };
-  },
 };
 </script>
 

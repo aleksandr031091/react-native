@@ -1,7 +1,7 @@
 <template>
-  <aside>
-    <ul>
-      <li>click film</li>
+  <aside class="nav">
+    <ul class="nav_list">
+      <li class="nav_list_item">click film</li>
     </ul>
   </aside>
 </template>
@@ -12,4 +12,33 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.nav {
+  padding: 20px;
+  min-width: 350px;
+  min-height: 100vh;
+  text-align: center;
+  box-shadow: 8px 0px 23px -7px rgba(34, 60, 80, 0.31);
+}
+
+.nav_list {
+  list-style: none;
+}
+
+.nav_list_item {
+  padding: 5px;
+  font-size: 20px;
+  color: #0099ff;
+  cursor: pointer;
+}
+
+.nav_list_item:not(:last-child) {
+  margin-bottom: 15px;
+}
+
+/* .navList_item :hover {
+  background-color: #e0ffe0;
+  border-radius: 10px;
+  box-shadow: 0px 8px 23px -7px rgba(175, 199, 96, 0.53);
+} */
+</style>
