@@ -1,14 +1,34 @@
 <template>
   <aside class="nav">
     <ul class="nav_list">
-      <li class="nav_list_item">click film</li>
+      <li
+        class="nav_list_item"
+        v-for="film of allFilms"
+        :key="film.episode_id"
+        v-on:click="getFilmId(film.episode_id)"
+      >
+        {{ film.title }}
+      </li>
     </ul>
   </aside>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "NavBar",
+
+  data() {
+    return { onclickFilm: 0 };
+  },
+
+  methods: {
+    getFilmId(id) {
+      console.log(id);
+    },
+  },
+
+  computed: mapGetters(["allFilms"]),
 };
 </script>
 
@@ -30,15 +50,16 @@ export default {
   font-size: 20px;
   color: #0099ff;
   cursor: pointer;
+  transition: 300ms;
 }
 
 .nav_list_item:not(:last-child) {
   margin-bottom: 15px;
 }
 
-/* .navList_item :hover {
+.nav_list_item:hover {
   background-color: #e0ffe0;
   border-radius: 10px;
   box-shadow: 0px 8px 23px -7px rgba(175, 199, 96, 0.53);
-} */
+}
 </style>

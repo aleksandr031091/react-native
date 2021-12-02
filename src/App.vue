@@ -8,6 +8,10 @@ import Main from "./components/main/Main.vue";
 export default {
   name: "App",
   components: { Main },
+
+  mounted() {
+    this.$store.dispatch("getAllFilmsAction");
+  },
 };
 </script>
 
