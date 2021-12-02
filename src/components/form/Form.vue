@@ -1,23 +1,19 @@
 <template>
-  <form @submit.prevent>
-    <input type="text" />
-    <h1>{{ title }}</h1>
-    <Button @click="incriment">click me</Button>
+  <form @submit.prevent class="form">
+    <input class="input_search" type="text" placeholder="Skywalker" />
+
+    <Button>Search</Button>
   </form>
 </template>
 
 <script>
+import Button from "../button/Button.vue";
 export default {
   name: "Form",
 
-  data() {
-    return { amauntOfClick: 0 };
-  },
-  computed: {
-    title() {
-      return `amaunt of click ${this.amauntOfClick}`;
-    },
-  },
+  components: { Button },
+
+  computed: {},
 
   methods: {
     incriment() {
@@ -27,4 +23,18 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.form {
+  margin-bottom: 50px;
+  display: flex;
+}
+
+.input_search {
+  margin-right: 10px;
+  padding-left: 5px;
+  width: 300px;
+  height: 30px;
+  color: #000083;
+  border: 1px solid #1919a7;
+}
+</style>

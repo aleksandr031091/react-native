@@ -14,17 +14,19 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 export default {
   name: "NavBar",
 
-  data() {
-    return { onclickFilm: 0 };
-  },
-
   methods: {
-    getFilmId(id) {
-      console.log(id);
+    ...mapMutations(["setFilm"]),
+
+    getFilmId(episodeId) {
+      this.onclickFilm = episodeId;
+
+      const film = this.allFilms.find((el) => el.episode_id === episodeId);
+
+      this.setFilm(film);
     },
   },
 

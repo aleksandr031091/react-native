@@ -11,9 +11,14 @@ export default {
       }
     },
   },
+
   mutations: {
     setAllFilms(state, films) {
       state.films = films;
+    },
+
+    setFilm(state, film) {
+      state.film = film;
     },
 
     getError(state, error) {
@@ -23,12 +28,17 @@ export default {
 
   state: {
     films: [],
+    film: {},
     error: "",
   },
 
   getters: {
     allFilms(state) {
       return state.films;
+    },
+
+    film(state) {
+      return state.film;
     },
   },
 };
