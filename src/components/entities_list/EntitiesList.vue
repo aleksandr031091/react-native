@@ -3,7 +3,7 @@
     <slot name="title"></slot>
     <ul>
       <template>
-        <slot name=""></slot>
+        <slot></slot>
       </template>
     </ul>
   </div>
@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: "ContentList",
+  name: "EntitiesList",
 };
 </script>
 

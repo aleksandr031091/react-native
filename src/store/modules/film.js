@@ -1,13 +1,41 @@
-import { getAllFilms } from "../../services/swapiDev";
+import {
+  getAllFilms,
+  getEntitiesInfo,
+  getSearch,
+} from "../../services/swapiDev";
 
 export default {
   actions: {
-    async getAllFilmsAction(ctx) {
+    async getAllFilmsAction({ commit }) {
       try {
         const films = await getAllFilms();
-        ctx.commit("setAllFilms", films.data.results);
+
+        commit("setAllFilms", films.data.results);
       } catch (error) {
-        ctx.commit("getError", error);
+        commit("getError", error);
+      }
+    },
+
+    async getEntitiesInfoAction({ commit }, link) {
+      try {
+        const entitiesInfo = await getEntitiesInfo(link);
+
+        commit("setEntitiesInfo", entitiesInfo.data);
+      } catch (error) {
+        commit("getError", error);
+      }
+    },
+
+    async getSearchAction({ commit }, searchValue) {
+      try {
+        const searchContent = await getSearch(searchValue);
+
+        commit(
+          "setSearchContent",
+          searchContent.map((obj) => obj.data.results)
+        );
+      } catch (error) {
+        commit("getError", error);
       }
     },
   },
@@ -21,6 +49,14 @@ export default {
       state.film = film;
     },
 
+    setEntitiesInfo(state, entitiesInfo) {
+      state.entitiesInfo = entitiesInfo;
+    },
+
+    setSearchContent(state, searchContent) {
+      state.searchContent = searchContent;
+    },
+
     getError(state, error) {
       state.error = error;
     },
@@ -29,6 +65,8 @@ export default {
   state: {
     films: [],
     film: {},
+    entitiesInfo: {},
+    searchContent: [],
     error: "",
   },
 
@@ -39,6 +77,10 @@ export default {
 
     film(state) {
       return state.film;
+    },
+
+    entitiesInfo(state) {
+      return state.entitiesInfo;
     },
   },
 };

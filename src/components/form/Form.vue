@@ -1,23 +1,31 @@
 <template>
-  <form @submit.prevent class="form">
-    <input class="input_search" type="text" placeholder="Skywalker" />
-
-    <Button>Search</Button>
+  <form @submit.prevent="onHandleSubmit" class="form">
+    <CustomInput type="text" v-model="text" />
+    <Button type="submit">Search</Button>
   </form>
 </template>
 
 <script>
+import CustomInput from "../shared/CustomInput.vue";
 import Button from "../button/Button.vue";
+import { mapActions } from "vuex";
+
 export default {
   name: "Form",
 
-  components: { Button },
+  data() {
+    return {
+      text: "",
+    };
+  },
 
-  computed: {},
+  components: { CustomInput, Button },
 
   methods: {
-    incriment() {
-      this.amauntOfClick += 1;
+    ...mapActions(["getSearchAction"]),
+
+    onHandleSubmit() {
+      this.getSearchAction(this.text);
     },
   },
 };
@@ -27,14 +35,5 @@ export default {
 .form {
   margin-bottom: 50px;
   display: flex;
-}
-
-.input_search {
-  margin-right: 10px;
-  padding-left: 5px;
-  width: 300px;
-  height: 30px;
-  color: #000083;
-  border: 1px solid #1919a7;
 }
 </style>
