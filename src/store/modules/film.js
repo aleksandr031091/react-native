@@ -82,5 +82,9 @@ export default {
     entitiesInfo(state) {
       return state.entitiesInfo;
     },
+
+    searchContent(state) {
+      return state.searchContent;
+    },
   },
 };

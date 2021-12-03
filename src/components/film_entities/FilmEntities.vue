@@ -12,6 +12,7 @@
           :key="link"
           :link="link"
           :currentLink="currentLink"
+          :content="entitiesInfo"
         />
       </ul>
       <hr />
@@ -25,6 +26,7 @@
           :key="link"
           :link="link"
           :currentLink="currentLink"
+          :content="entitiesInfo"
         />
       </ul>
       <hr />
@@ -38,6 +40,7 @@
           :key="link"
           :link="link"
           :currentLink="currentLink"
+          :content="entitiesInfo"
         />
       </ul>
       <hr />
@@ -58,7 +61,7 @@ export default {
 
   components: { ContentItem },
 
-  computed: mapGetters(["film"]),
+  computed: mapGetters(["film", "entitiesInfo"]),
 
   methods: {
     onClickLink(event) {
