@@ -1,10 +1,5 @@
 <template>
-  <input
-    class="custom_input"
-    type="text"
-    placeholder="Skywalker"
-    v-on="listeners"
-  />
+  <input class="custom_input" placeholder="Skywalker" v-on="listeners" />
 </template>
 
 <script>

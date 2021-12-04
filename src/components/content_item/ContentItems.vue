@@ -2,13 +2,18 @@
   <li class="content_items">
     <p class="link_text" @click="onClickLink(link)">{{ link }}</p>
     <div v-if="currentLink === link && content">
-      <!-- <p class="link_items" v-if="content.title">{{ content.title }}</p> -->
-      <ul>
-        <li v-for="item in content" :key="item">
-          <p>{{ item }}</p>
+      <!-- вынести p в отдельный компонент -->
+
+      <ul class="content_items">
+        <li v-for="(item, key) in content" :key="key">
+          <p>{{ key }} - {{ item }}</p>
         </li>
       </ul>
-      <!-- <p class="link_items" v-if="content.opening_crawl">
+
+      <!-- вынести p в отдельный компонент -->
+
+      <!-- <p class="link_items" v-if="content.title">{{ content.title }}</p>
+      <p class="link_items" v-if="content.opening_crawl">
         {{ content.opening_crawl }}
       </p>
       <p class="link_items" v-if="content.episode_id">
@@ -75,9 +80,9 @@
         >
           {{ residentsLink }}
         </li>
-      </ul> -->
+      </ul>
 
-      <!-- <ul class="content_items">
+      <ul class="content_items">
         <li
           class="link_text"
           :key="pilotsLink"

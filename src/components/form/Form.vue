@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="onHandleSubmit" class="form">
-    <CustomInput type="text" v-model="text" />
+    <CustomInput v-model.trim="text" />
     <Button type="submit">Search</Button>
   </form>
 </template>
@@ -8,7 +8,7 @@
 <script>
 import CustomInput from "../shared/CustomInput.vue";
 import Button from "../button/Button.vue";
-import { mapActions } from "vuex";
+import { mapActions, mapMutations } from "vuex";
 
 export default {
   name: "Form",
@@ -23,15 +23,19 @@ export default {
 
   methods: {
     ...mapActions(["getSearchAction"]),
+    ...mapMutations(["setIsSearching"]),
 
     onHandleSubmit() {
+      if (!this.text) return;
       this.getSearchAction(this.text);
+      this.setIsSearching(true);
+      this.text = "";
     },
   },
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .form {
   margin-bottom: 50px;
   display: flex;

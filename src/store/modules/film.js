@@ -54,7 +54,13 @@ export default {
     },
 
     setSearchContent(state, searchContent) {
+      //   const filtredEmptyContent = searchContent.filter((ar) => ar.length);
+      //   console.log(filtredEmptyContent);
       state.searchContent = searchContent;
+    },
+
+    setIsSearching(state, isSearching) {
+      state.isSearching = isSearching;
     },
 
     getError(state, error) {
@@ -67,6 +73,7 @@ export default {
     film: {},
     entitiesInfo: {},
     searchContent: [],
+    isSearching: false,
     error: "",
   },
 
@@ -85,6 +92,10 @@ export default {
 
     searchContent(state) {
       return state.searchContent;
+    },
+
+    isSearching(state) {
+      return state.isSearching;
     },
   },
 };

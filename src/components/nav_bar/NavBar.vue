@@ -5,7 +5,7 @@
         class="nav_list_item"
         v-for="film of allFilms"
         :key="film.episode_id"
-        v-on:click="getFilmId(film.episode_id)"
+        @click="getFilmId(film.episode_id)"
       >
         {{ film.title }}
       </li>
@@ -15,11 +15,12 @@
 
 <script>
 import { mapGetters, mapMutations } from "vuex";
+
 export default {
   name: "NavBar",
 
   methods: {
-    ...mapMutations(["setFilm"]),
+    ...mapMutations(["setFilm", "setIsSearching"]),
 
     getFilmId(episodeId) {
       this.onclickFilm = episodeId;
@@ -27,6 +28,7 @@ export default {
       const film = this.allFilms.find((el) => el.episode_id === episodeId);
 
       this.setFilm(film);
+      this.setIsSearching(false);
     },
   },
 
@@ -43,9 +45,9 @@ export default {
   box-shadow: 8px 0px 23px -7px rgba(34, 60, 80, 0.31);
 }
 
-.nav_list {
+/* .nav_list {
   list-style: none;
-}
+} */
 
 .nav_list_item {
   padding: 5px;
