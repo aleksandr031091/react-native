@@ -54,8 +54,6 @@ export default {
     },
 
     setSearchContent(state, searchContent) {
-      //   const filtredEmptyContent = searchContent.filter((ar) => ar.length);
-      //   console.log(filtredEmptyContent);
       state.searchContent = searchContent;
     },
 

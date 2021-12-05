@@ -15,19 +15,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../assets/scss/variables.scss";
+
 .btn {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 70px;
   height: 30px;
-  border: 1px solid #1919a7;
+  color: $accentTextColor;
+  border: 1px solid $accentTextColor;
   background-color: transparent;
 
   &:hover {
-    color: #0066ff;
-    background-color: #caffca9d;
-    box-shadow: 0px 8px 23px -7px rgba(175, 199, 96, 0.53);
+    color: $hoverAccentTextColor;
+    border: 1px solid $hoverAccentTextColor;
+    background-color: $bgColor;
+    box-shadow: $boxShadow;
     transform: scale(0.9);
     cursor: pointer;
   }

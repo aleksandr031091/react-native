@@ -25,7 +25,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .main_block {
   padding: 30px;
 }

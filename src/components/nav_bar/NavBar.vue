@@ -37,17 +37,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../assets/scss/variables.scss";
+
 .nav {
   padding: 20px;
   min-width: 350px;
   min-height: 100vh;
   text-align: center;
-  box-shadow: 8px 0px 23px -7px rgba(34, 60, 80, 0.31);
+  box-shadow: $asideShadow;
 
   &_list_item {
     padding: 5px;
     font-size: 20px;
-    color: rgb(0, 162, 255);
+    color: $accentTextColor;
     cursor: pointer;
     transition: 300ms;
 
@@ -56,10 +58,10 @@ export default {
     }
 
     &:hover {
-      color: #0066ff;
-      background-color: #caffca9d;
+      color: $hoverAccentTextColor;
+      background-color: $bgColor;
       border-radius: 10px;
-      box-shadow: 0px 8px 23px -7px rgba(175, 199, 96, 0.53);
+      box-shadow: $boxShadow;
     }
   }
 }

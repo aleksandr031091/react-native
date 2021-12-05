@@ -18,12 +18,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../assets/scss/variables.scss";
+
 .custom_input {
   margin-right: 10px;
   padding-left: 5px;
   width: 300px;
   height: 30px;
-  color: #000083;
-  border: 1px solid #1919a7;
+  color: $accentTextColor;
+  border: 1px solid $accentTextColor;
 }
 </style>

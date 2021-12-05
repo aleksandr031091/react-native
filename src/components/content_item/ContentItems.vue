@@ -18,7 +18,10 @@
               <span class="link_list_title">{{ key }}</span> - {{ item }}
             </p>
 
-            <ul v-if="Array.isArray(item) && item.length" class="content_items">
+            <ul
+              v-else-if="Array.isArray(item) && item.length"
+              class="content_items"
+            >
               <span class="link_list_title">{{ key }}</span>
               <li
                 class="link_text"
@@ -33,14 +36,15 @@
         </li>
       </ul>
 
-      <ul
-        v-show="currentLink === listCurrentLink && !currentLink"
-        class="content_items"
-      >
+      <!-- =========================== render info on click link in entitiesInfo ===========================  -->
+
+      <ul v-if="currentLink === listCurrentLink" class="content_items">
         <li class="link_text" :key="key" v-for="(item, key) in entitiesInfo">
           {{ item }}
         </li>
       </ul>
+
+      <!-- =========================== render info on click link in entitiesInfo ===========================  -->
     </div>
   </li>
 </template>
@@ -57,8 +61,9 @@ export default {
 
   props: {
     link: String,
-    currentLink: String,
     content: Object,
+    currentLink: String,
+    currentLinkSearch: String,
   },
 
   computed: mapGetters(["entitiesInfo"]),
@@ -80,6 +85,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../assets/scss/variables.scss";
+
 .content_items,
 .content_items_list {
   display: flex;
@@ -88,8 +95,8 @@ export default {
   padding: 10px;
 
   &:hover {
-    background-color: #caffca9d;
-    box-shadow: 0px 8px 23px -7px rgba(175, 199, 96, 0.53);
+    background-color: $bgColor;
+    box-shadow: $boxShadow;
   }
 }
 .content_items_list {
@@ -99,17 +106,17 @@ export default {
 }
 
 .link_text {
-  color: rgb(0, 162, 255);
+  color: $accentTextColor;
 
   &:hover {
     cursor: pointer;
-    color: #0066ff;
+    color: $hoverAccentTextColor;
   }
 }
 
 .link_list_title {
   margin-bottom: 10px;
   font-weight: 700;
-  color: #41528f;
+  color: $listTitleColor;
 }
 </style>
