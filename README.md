@@ -2,7 +2,7 @@
 
 Information about 6 series with search and display of information about people, planets, starships.
 
-This project was bootstrapped with [Parcel]().
+This project was bootstrapped with [Vercel](https://vercel.com).
 
 ## Installation
 
