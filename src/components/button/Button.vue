@@ -14,7 +14,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .btn {
   display: flex;
   align-items: center;
@@ -23,10 +23,13 @@ export default {
   height: 30px;
   border: 1px solid #1919a7;
   background-color: transparent;
-}
-.btn:hover {
-  transform: scale(0.9);
-  border: 1px solid #51ff00;
-  cursor: pointer;
+
+  &:hover {
+    color: #0066ff;
+    background-color: #caffca9d;
+    box-shadow: 0px 8px 23px -7px rgba(175, 199, 96, 0.53);
+    transform: scale(0.9);
+    cursor: pointer;
+  }
 }
 </style>

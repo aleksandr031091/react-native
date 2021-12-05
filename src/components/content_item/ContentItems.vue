@@ -1,155 +1,59 @@
 <template>
   <li class="content_items">
-    <p class="link_text" @click="onClickLink(link)">{{ link }}</p>
-    <div v-if="currentLink === link && content">
-      <!-- вынести p в отдельный компонент -->
+    <p class="link_text" @click="onHandleClickLink(link)">{{ link }}</p>
 
-      <ul class="content_items">
+    <div v-show="(currentLink === link && content) || listCurrentLink">
+      <ul class="content_items_list">
         <li v-for="(item, key) in content" :key="key">
-          <p>{{ key }} - {{ item }}</p>
+          <template>
+            <p
+              v-if="
+                !Array.isArray(item) &&
+                key !== 'url' &&
+                key !== 'created' &&
+                key !== 'edited' &&
+                key !== 'homeworld'
+              "
+            >
+              <span class="link_list_title">{{ key }}</span> - {{ item }}
+            </p>
+
+            <ul v-if="Array.isArray(item) && item.length" class="content_items">
+              <span class="link_list_title">{{ key }}</span>
+              <li
+                class="link_text"
+                :key="link"
+                v-for="link of item"
+                @click="onHandleClickListLink(link)"
+              >
+                {{ link }}
+              </li>
+            </ul>
+          </template>
         </li>
       </ul>
 
-      <!-- вынести p в отдельный компонент -->
-
-      <!-- <p class="link_items" v-if="content.title">{{ content.title }}</p>
-      <p class="link_items" v-if="content.opening_crawl">
-        {{ content.opening_crawl }}
-      </p>
-      <p class="link_items" v-if="content.episode_id">
-        episode: ({{ content.episode_id }})
-      </p>
-      <p class="link_items" v-if="content.release_date">
-        release date:
-        {{ content.release_date.split("-").reverse().join("-") }}
-      </p>
-      <p class="link_items" v-if="content.director">
-        director: {{ content.director }}
-      </p>
-      <p class="link_items" v-if="content.producer">
-        producer: {{ content.producer }}
-      </p>
-      <p class="link_items" v-if="content.name">name: {{ content.name }}</p>
-      <p class="link_items" v-if="content.height">
-        height: {{ content.height }}
-      </p>
-      <p class="link_items" v-if="content.mass">mass: {{ content.mass }}</p>
-      <p class="link_items" v-if="content.hair_color">
-        hair color: {{ content.hair_color }}
-      </p>
-      <p class="link_items" v-if="content.skin_color">
-        skin color: {{ content.skin_color }}
-      </p>
-      <p class="link_items" v-if="content.eye_color">
-        eye color: {{ content.eye_color }}
-      </p>
-      <p class="link_items" v-if="content.gender">
-        gender: {{ content.gender }}
-      </p>
-      <p class="link_items" v-if="content.model">model: {{ content.model }}</p>
-      <p class="link_items" v-if="content.starship_class">
-        starship class: {{ content.starship_class }}
-      </p>
-      <p class="link_items" v-if="content.passengers">
-        passanger: {{ content.passengers }}
-      </p>
-      <p class="link_items" v-if="content.diameter">
-        diameter: {{ content.diameter }}
-      </p>
-      <p class="link_items" v-if="content.population">
-        population: {{ content.population }}
-      </p>
-      <p class="link_items" v-if="content.gravity">
-        gravity: {{ content.gravity }}
-      </p>
-      <p class="link_items" v-if="content.rotation_period">
-        rotation period: {{ content.rotation_period }}
-      </p>
-
-      <ul class="content_items" v-if="content.films">
-        <li class="link_text" :key="filmLink" v-for="filmLink of content.films">
-          {{ filmLink }}
+      <ul
+        v-show="currentLink === listCurrentLink && !currentLink"
+        class="content_items"
+      >
+        <li class="link_text" :key="key" v-for="(item, key) in entitiesInfo">
+          {{ item }}
         </li>
       </ul>
-
-      <ul class="content_items" v-if="content.residents">
-        <li
-          class="link_text"
-          :key="residentsLink"
-          v-for="residentsLink of content.residents"
-        >
-          {{ residentsLink }}
-        </li>
-      </ul>
-
-      <ul class="content_items">
-        <li
-          class="link_text"
-          :key="pilotsLink"
-          v-for="pilotsLink of content.pilots"
-        >
-          {{ pilotsLink }}
-        </li>
-      </ul>
-
-      <ul class="content_items">
-        <li
-          class="link_text"
-          :key="charactersLink"
-          v-for="charactersLink of content.charactersLink"
-        >
-          {{ charactersLink }}
-        </li>
-      </ul>
-
-      <ul class="content_items">
-        <li
-          class="link_text"
-          :key="planetsLink"
-          v-for="planetsLink of content.planets"
-        >
-          {{ planetsLink }}
-        </li>
-      </ul>
-
-      <ul class="content_items">
-        <li
-          class="link_text"
-          :key="starshipsLink"
-          v-for="starshipsLink of content.starships"
-        >
-          {{ starshipsLink }}
-        </li>
-      </ul>
-
-      <ul class="content_items">
-        <li
-          class="link_text"
-          :key="vehiclesLink"
-          v-for="vehiclesLink of content.vehicles"
-        >
-          {{ vehiclesLink }}
-        </li>
-      </ul>
-
-      <ul class="content_items">
-        <li
-          class="link_text"
-          :key="speciesLink"
-          v-for="speciesLink of content.species"
-        >
-          {{ speciesLink }}
-        </li>
-      </ul> -->
     </div>
   </li>
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "ContentItem",
+
+  data() {
+    return { listCurrentLink: "" };
+  },
 
   props: {
     link: String,
@@ -157,30 +61,55 @@ export default {
     content: Object,
   },
 
+  computed: mapGetters(["entitiesInfo"]),
+
   methods: {
     ...mapActions(["getEntitiesInfoAction"]),
 
-    onClickLink(link) {
+    onHandleClickLink(link) {
+      this.listCurrentLink = "";
+      this.getEntitiesInfoAction(link);
+    },
+
+    onHandleClickListLink(link) {
+      this.listCurrentLink = link;
       this.getEntitiesInfoAction(link);
     },
   },
 };
 </script>
 
-<style scoped>
-.content_items {
+<style lang="scss" scoped>
+.content_items,
+.content_items_list {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 5px;
+  padding: 10px;
+
+  &:hover {
+    background-color: #caffca9d;
+    box-shadow: 0px 8px 23px -7px rgba(175, 199, 96, 0.53);
+  }
+}
+.content_items_list {
+  &:hover {
+    background: none;
+  }
 }
 
-.link_text:hover {
-  cursor: pointer;
-  color: #0066ff;
+.link_text {
+  color: rgb(0, 162, 255);
+
+  &:hover {
+    cursor: pointer;
+    color: #0066ff;
+  }
 }
 
-.link_text:not(:last-child) {
-  margin-bottom: 5px;
+.link_list_title {
+  margin-bottom: 10px;
+  font-weight: 700;
+  color: #41528f;
 }
 </style>

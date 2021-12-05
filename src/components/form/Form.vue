@@ -35,7 +35,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .form {
   margin-bottom: 50px;
   display: flex;

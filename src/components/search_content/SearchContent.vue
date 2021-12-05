@@ -30,5 +30,3 @@ export default {
   computed: mapGetters(["searchContent"]),
 };
 </script>
-
-<style lang="scss" scoped></style>
